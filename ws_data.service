@@ -1,0 +1,14 @@
+[Unit]
+Description=Gunicorn instance to serve WSData 
+After=network.target
+
+[Service]
+User=ubuntu
+Group=www-data	
+WorkingDirectory=/home/ubuntu/WSData
+Environment="PATH=/home/ubuntu/WSDataEnv/bin"
+ExecStart=/home/ubuntu/WSDataEnv/bin/gunicorn --workers 4 --bind 0.0.0.0:5000 -m 007 wsgi:app
+
+[Install]
+WantedBy=multi-user.target
+
